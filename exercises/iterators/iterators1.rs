@@ -9,17 +9,24 @@
 // Execute `rustlings hint iterators1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 fn main() {
     let my_fav_fruits = vec!["banana", "custard apple", "avocado", "peach", "raspberry"];
 
-    let mut my_iterable_fav_fruits = ???;   // TODO: Step 1
+    // Step 1: Create an immutable iterator over the vector.
+    let mut my_iterable_fav_fruits = my_fav_fruits.iter(); 
 
+    // First call to next() returns the first element
     assert_eq!(my_iterable_fav_fruits.next(), Some(&"banana"));
-    assert_eq!(my_iterable_fav_fruits.next(), ???);     // TODO: Step 2
+    // Step 2: The next call should return the second element
+    assert_eq!(my_iterable_fav_fruits.next(), Some(&"custard apple"));
+    // Continues to return the next element
     assert_eq!(my_iterable_fav_fruits.next(), Some(&"avocado"));
-    assert_eq!(my_iterable_fav_fruits.next(), ???);     // TODO: Step 3
+    // Step 3: The next call should return the fourth element
+    assert_eq!(my_iterable_fav_fruits.next(), Some(&"peach"));
+    // The last fruit in the vector
     assert_eq!(my_iterable_fav_fruits.next(), Some(&"raspberry"));
-    assert_eq!(my_iterable_fav_fruits.next(), ???);     // TODO: Step 4
+    // Step 4: Once all elements are consumed, it should return None
+    assert_eq!(my_iterable_fav_fruits.next(), None);
 }
+
