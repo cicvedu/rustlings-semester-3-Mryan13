@@ -16,9 +16,9 @@ struct Person {
 // We implement the Default trait to use it as a fallback
 // when the provided string is not convertible into a Person object
 impl Default for Person {
-    fn default() -> Person {
+    fn default() -> Self {
         Person {
-            name: String::from("John"),
+            name: "John".to_string(),
             age: 30,
         }
     }
@@ -40,17 +40,32 @@ impl Default for Person {
 // If while parsing the age, something goes wrong, then return the default of
 // Person Otherwise, then return an instantiated Person object with the results
 
-// I AM NOT DONE
 
 impl From<&str> for Person {
     fn from(s: &str) -> Person {
+        let parts: Vec<&str> = s.split(',').collect();
+
+        if parts.len() != 2 {
+            return Person::default();
+        }
+
+        let name = parts[0].to_string();
+        if name.is_empty() || parts[1].is_empty() {
+            return Person::default();
+        }
+
+        match parts[1].parse::<u32>() {
+            Ok(age) => Person {
+                name,
+                age: age as usize,
+            },
+            Err(_) => Person::default(),
+        }
     }
 }
 
 fn main() {
-    // Use the `from` function
     let p1 = Person::from("Mark,20");
-    // Since From is implemented for Person, we should be able to use Into
     let p2: Person = "Gerald,70".into();
     println!("{:?}", p1);
     println!("{:?}", p2);
